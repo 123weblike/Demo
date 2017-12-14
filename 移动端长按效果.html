@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript 实现长按效果</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+</head>
+<body>
+<button id="btn">长按我</button>
+</body>
+<script>
+    var btn = document.getElementById("btn");
+    longPressFn(btn);
+    function longPressFn (target){
+        var timer = null;
+        target.addEventListener("touchstart",function(){
+            timer = setInterval(handler,300);
+        });
+        target.addEventListener("touchend",function(){
+            clearInterval(timer);
+        });
+    }
+    // 这里就是放你的业务代码
+    function handler(){
+        console.log("你长按了我");
+    }
+</script>
+</html>
