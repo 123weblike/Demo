@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--ajax  需要服务器的环境
+ajax  和  jq  load 加载一趟都需要服务器环境
+最终我们的项目都会上传到服务器上
+所以我们不用担心，这个不是bug
+-->
+<input type="button" value="走你"/>
+<div class="box"></div>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    $("input").click(function(){
+        /*1.js  的ajax*/
+        //1.  实例化xmlhttprequset对象：他是车
+        var  xhr=  new XMLHttpRequest();
+        //三个参数，  第一个  请求方式  get  post
+        // get  方式主要用于  从后台是要数据
+        //post  主要用于出货  给后台数据时使用。
+        //get 方式会把我们的数据，暴露在url里面
+        //get  有大小的限制
+        //post  相对比较安全
+        //2.个参数是接口  url
+        //后台会直接给我们，然后直接拿过来用就可以了
+        //3.是否异步
+        //异步是非阻塞。
+        xhr.open("get","js/listData.json");
+        //open： 请求方式 接口 是否异步；
+        //  想要什么的时候  ，传递过去的方式是不一样
+        //get  要告诉后台想要hsx 通过url去告诉后台
+        //post  send去告诉后台
+        xhr.send(null);//get的时候也必须有send
+       /*get方式用url去传递参数，所以在send里面直接null
+       但是用post的时候，就要在send里面传递参数。
+        xhr.open("post","js/listData.json");
+        xhr.send("name=hsx")*/
+        //send:请求主体 用post需要把数据传进去。get方式用url
+        //传递参数，所以在send直接为null
+
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4){
+                //表示，路上没有遇到妖精
+                //并且王总的不为美女所动
+                if(xhr.status==200){
+                    //回来也很安全
+                    //拿到后台（烟草原厂地的货了）
+                    var date=xhr.responseText;
+                    //console.log(date);
+                    $(".box").html(date);
+                }
+            }
+
+
+        };
+        /*2.jq  的ajax*/
+        $. ajax({
+           /* 默认是get请求，如果是post请求那么type后面就改成post*/
+            //type:"GET",   请求的类型
+            //data:==send  请求的主体
+            url:"js/listData.json",  //接口
+            success:function(e){
+                console.log(e);     //请求成功之后
+            }
+        })
+    })
+
+</script>
+</html>
