@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color:rgba(0,0,0,.5);
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin: 100px 200px;
+        }
+        .box .box2{
+            width: 50px;
+            height: 50px;
+            background-color: #0b0c11;
+            float:right;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="box2" id="box2"></div>
+</div>
+</body>
+<script>
+    var box=document.getElementsByClassName("box")[0];
+    var body=document.getElementsByTagName("body")[0];
+    var box2=box.children[0];
+    /*事件冒泡和事件捕获*/
+    /*事件冒泡：当一个元素上的事件被触发的时候，比如说鼠标点击了一个按钮，同样的事件将会在那个元素
+    的所有祖先元素中被触发。这一过程称为事件冒泡；这个事件从原始元素开始一直冒泡到dom树的最上层*/
+   /*以下事件不冒泡：blur focus load unload*/
+   /* 默认是先捕获（true）后冒泡*/
+    /* box.onclick=function(){
+        console.log(box);
+    };*/
+   /* box2.onclick=function(e){
+        var event=e||window.event;
+        if(event&&event.stopPropagation){
+            event.stopPropagation();    //w3c标准
+        }else{
+            event.cancelBubble=true;   //ie678  ie浏览器
+        }
+       box.style.display="none";
+    };
+    阻止冒泡：
+    var event=e||window.event;
+    if(event&&event.stopPropagation){
+    event.stopPropagation();    //w3c标准
+    }else{
+    event.cancelBubble=true;   //ie678  ie浏览器
+    }
+
+    body.onclick=function(e){
+        var event=e||window.event;
+        if(event&&event.stopPropagation){
+            event.stopPropagation();    //w3c标准
+        }else{
+            event.cancelBubble=true;   //ie678  ie浏览器
+        }
+        box.style.display="none";
+    };*/
+   /* body.addEventListener('click',function(){
+        console.log(body);
+        box.style.display="none";
+    },true);                /!* true为捕获，false为冒泡*!/
+    box2.addEventListener('click',function(){
+        console.log(box2);
+        box.style.display="none";
+    },true);
+    box.addEventListener('click',function(){
+        console.log(box);
+        box.style.display="block";
+    },true);*/
+/*事件目标：targetId
+    返回当前事件对象id；
+    火狐谷歌等 evnt. target.id;
+    ie678   event.scrElement.id;
+    写法：
+    var targetId=event.target? event.target.id:event.srcElement.id;*/
+  body.onclick=function(event){     /* 必须给父元素设置点击事件*/
+      var event=event||window.event;
+      var targetId=event.target? event.target.id:event.srcElement.id;
+      if(targetId=="box"){
+          box.style.display="block";
+      }
+      if(targetId=="box2"){
+          box.style.display="none";
+      }
+  }
+
+</script>
+</html>
