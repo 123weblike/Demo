@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ol{
+            width: 200px;
+            height: 20px;
+            margin: 100px 200px;
+        }
+        li{
+            width: 12px;
+            height: 12px;
+            border-radius: 100%;
+            list-style: none;
+            float: left;
+            background-color: pink;
+            margin-left: 10px;
+        }
+        .col{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ol>
+        <li class="col"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+</div>
+</body>
+<script>
+
+        var timer=null;
+        function cla(a){
+            return document.getElementsByClassName(a);
+        }
+        var i=0;
+        var box=cla("box")[0];
+        var ol=box.children[0];
+        var li=ol.children;
+        clearInterval(timer);
+        timer=setInterval(function(){
+                  i++;
+                  if(i>li.length-1){
+                      i=0;
+                  }
+//                li[i].onclick=function(){
+                   for(var j=0;j<=li.length-1;j++){
+                       li[j].className="";
+                   }
+                   li[i].className="col";
+//                };
+
+
+
+        },1000)
+
+
+
+
+
+
+</script>
+</html>
