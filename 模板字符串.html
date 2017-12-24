@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+   /* let app="apple",
+    drink="mulik";
+    let breakfast=`今天的早餐是${app} 与 ${drink}!`;
+    console.log(breakfast);*/
+    //带标签的模板字符串
+    let app="apple",
+            drink="mulik";
+    let breakfast=happy`今天的早餐是${app} 与 ${drink}!`;
+    function happy(strings,...values){
+       //console.log(strings);
+       //console.log(values);
+       let result='';
+       for(var i=0;i<values.length;i++){
+           result+=strings[i];
+           result+=values[i];
+       }
+       result+=strings[strings.length-1];
+       return result;
+   }
+   console.log(breakfast);
+//判断字符串里是否包含其他字符串
+let app2="apple",
+drink2="mulik";
+let breakfast2=happy`今天的早餐是${app} 与 ${drink}!`;
+console.log(breakfast2.startsWith("今天"));  //判断首字符串
+console.log(breakfast2.endsWith("今天"));  //判断末尾字符串
+console.log(breakfast2.endsWith('!'));
+console.log(breakfast2.includes("今天"));   //判断是否包含某字符串
+</script>
+</html>
