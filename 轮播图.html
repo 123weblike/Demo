@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 490px;
+            height: 170px;
+            margin:100px 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .box ul{
+            width: 3000px;
+            height: 170px;
+            position: absolute;
+            top:0;
+            left: 0;
+           /* transition: left .5s linear 0s;*/
+        }
+        .box ul li{
+            list-style: none;
+            width: 490px;
+            height: 170px;
+            float: left;
+        }
+        .box ul li img{
+            width: 100%;
+            height: 100%;
+        }
+        .box ol{
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+        }
+        .box ol li{
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            float: left;
+            margin-left: 10px;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        .box ol li.col{
+            background-color: red;
+            color:white ;
+        }
+        .dianji div{
+            position: absolute;
+            width: 20px;
+            height: 50px;
+            background-color: palegreen;
+            top:50%;
+            margin-top: -25px;
+            text-align: center;
+            line-height: 50px;
+        }
+        .dianji .right{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul> <!-- a1-5-->
+        <li><img src="images/01.jpg" alt=""></li>
+        <li><img src="images/02.jpg" alt=""></li>
+        <li><img src="images/03.jpg" alt=""></li>
+        <li><img src="images/04.jpg" alt=""></li>
+        <li><img src="images/05.jpg" alt=""></li>
+        <li><img src="images/01.jpg" alt=""></li>
+    </ul>
+    <ol>
+        <li class="col">1</li>  <!--index0-4-->
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+    <div class="dianji">
+        <div class="left"><</div>
+        <div class="right">
+            >
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    window.onload=function(){
+        var box=document.getElementsByClassName("box")[0];
+        var ul=box.children[0];
+        var li=ul.children[0];
+        var ww=li.offsetWidth;
+        //console.log(ww);
+        var lis=ul.children;
+        var len=lis.length;
+        var ol=box.children[1];
+        var oli=ol.children;
+        var dianji=box.children[2];
+        var lt=dianji.children[0];
+        var rt=dianji.children[1];
+        var fa=true;
+        var index=0;
+        var a=0;
+        function bb(object,distance,fn){
+            clearInterval(object.timer1);
+            object.timer1=setInterval(function(){
+                var left=object.offsetLeft;
+                var stepp=(distance-left)/10;
+                if(distance>left){
+                    stepp=Math.ceil(stepp);
+                }else{
+                    stepp=Math.floor(stepp);
+                }
+                //console.log(stepp);
+                object.style.left=left+stepp+"px";
+                if(object.offsetLeft==distance){
+                    clearInterval(object.timer1);
+                    if(fn&&typeof fn=="function"){
+                        fn();
+                    }
+                }
+
+
+            },5)
+        }
+        for(var i=0;i<len-1;i++){
+            oli[i].index=i;
+            oli[i].onmouseover=function(){
+                if(fa){
+                    fa=false;
+                    index=this.index;
+                    a=this.index;
+                    bb(ul,-a*ww,ff);
+                    for(var j=0;j<oli.length;j++){
+                        oli[j].className="";
+                    }
+                    oli[this.index].className="col";
+                }
+
+            }
+
+        }
+        function ff(){
+            fa=true;
+        }
+
+        rt.onclick=function(){
+            if(fa){
+                fa=false;
+                a++;
+                index++;
+                if(a>len-1){
+                    a=1;
+                    ul.style.left="0px";
+                }
+                if(index>len-2){
+                    index=0;
+                }
+                bb(ul,-a*ww,ff);
+                for(var j=0;j<oli.length;j++){
+                    oli[j].className="";
+                }
+                oli[index].className="col";
+            }
+
+        };
+
+        lt.onclick=function(){
+            if(fa){
+                fa=false;
+                a--;
+                index--;
+                if(a<0){
+                    a=4;
+                    ul.style.left=-(len-1)*ww+"px";
+                }
+                if(index<0){
+                    index=4;
+                }
+                bb(ul,-a*ww,ff);
+                for(var j=0;j<len-1;j++){
+                    oli[j].className="";
+                }
+                oli[index].className="col";
+            }
+
+        }
+
+    }
+</script>
+</html>
