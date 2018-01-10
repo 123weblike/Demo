@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box{
+            width: 810px;
+            height: 300px;
+            margin-left: 300px;
+            margin-top: 100px;
+            background-color: #00c6ff;
+            text-align: center;
+        }
+        input{
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .box ul{
+            width: 810px;
+            height: 300px;
+            position: relative;
+        }
+        .box ul li{
+            width: 60px;
+            height: 60px;
+            background-color: #00d420;
+            float: left;
+            text-align: center;
+            list-style: none;
+            line-height: 60px;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .box ul li.have{
+            background-color: red;
+            color: white;
+        }
+        .box span{
+            color: red;
+        }
+        .box p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text" value="点名">
+    <ul >
+        <li class="have">张帆</li>
+        <li>孙承敏</li>
+        <li>潘颖珂</li>
+        <li>秦艺林</li>
+        <li>张晓霞</li>
+        <li>栗魁英</li>
+        <li>孙慧仙</li>
+        <li>张锋</li>
+        <li>吴梦璇</li>
+        <li>孙鲍</li>
+        <li>李婉</li>
+        <li>杨鹏展</li>
+        <li>马占勇</li>
+        <li>张书俊</li>
+        <li>李忠阳</li>
+        <li>崔伟超</li>
+        <li>尹旭然</li>
+        <li>李佳祥</li>
+        <li>胡井星</li>
+        <li>孙嘉祥</li>
+        <li>赵超</li>
+        <li>南鑫</li>
+        <li>穆金峰</li>
+        <li>杨海川</li>
+        <li>王皓月</li>
+        <li>王润</li>
+        <li>康卫强</li>
+    </ul>
+   <p>恭喜<span>xxx</span> 同学，中奖了！</p>
+</div>
+</body>
+<script>
+   var box=document.getElementsByClassName("box")[0];
+    var btn=box.children[0];
+    var ul=box.children[1];
+   var span=document.getElementsByTagName("span")[0];
+   var li=ul.children;
+    var lis=li.length;
+   var ss=document.createElement("p");
+   var gg=box.appendChild(ss);
+   //console.log(gg);
+   var index=0;
+    var k=0;
+   function bb(){
+           k++;
+           if(k>lis-1){
+               k=0;
+           }
+           for(var j=0;j<lis;j++){
+               li[j].className="";
+           }
+           li[k].className="have";
+           span.innerHTML=li[k].innerHTML;
+           }
+   var fa=true;
+  /* var timer=null;*/
+   btn.onclick=function(){
+       if(fa==true){
+               fa=false;
+           timer=setInterval(bb,9)
+           }else{
+               fa=true;
+               clearInterval(timer);
+             /* xx.innerHTML=li[k].innerHTML;
+              ss.innerHTML="恭喜"+xx+"同学，中奖了！"*/
+            }
+       //console.log(fa);
+
+   }
+</script>
+</html>
