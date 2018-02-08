@@ -1,0 +1,49 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="submit" value="全选">
+<input type="submit" value="取消">
+<input type="submit" value="反选">
+<ul>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+    <li><input type="checkbox" class="check"></li>
+</ul>
+</body>
+<script>
+    var input1=document.getElementsByTagName('input')[0];
+    var input2=document.getElementsByTagName('input')[1];
+    var input3=document.getElementsByTagName('input')[2];
+    var ul=document.getElementsByTagName('ul')[0];
+    var li=ul.children;
+    input1.onclick = function() {
+        for(var i = 0; i < li.length; i++) {
+                li[i].children[0].checked =true;
+            }
+    };
+    input2.onclick = function() {
+        for(var i = 0; i < li.length; i++) {
+            li[i].children[0].checked =false;
+        }
+    };
+    input3.onclick = function() {
+        for(var i = 0; i < li.length; i++) {
+            li[i].children[0].checked =!li[i].children[0].checked;
+        }
+    }
+
+
+
+</script>
+</html>
